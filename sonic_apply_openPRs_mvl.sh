@@ -16,11 +16,12 @@ fi
 url="https://github.com/Azure"
 urlsai="https://patch-diff.githubusercontent.com/raw/opencomputeproject"
 
-declare -a PATCHES=(P1 P2 P3 P4)
-declare -A P1=( [NAME]=sonic-buildimage [DIR]=. [PR]="3392" [URL]="$url" )
+declare -a PATCHES=(P1 P2 P3 P4 P5)
+declare -A P1=( [NAME]=sonic-buildimage [DIR]=. [PR]="3392 3556" [URL]="$url" )
 declare -A P2=( [NAME]=sonic-swss [DIR]=src/sonic-swss [PR]=1015 [URL]="$url" )
 #declare -A P3=( [NAME]=sonic-utilities [DIR]=src/sonic-utilities [PR]=619 [URL]="$url" )
 declare -A P4=( [NAME]=SAI [DIR]=src/sonic-sairedis/SAI [PR]="993 969" [URL]="$urlsai" )
+declare -A P5=( [NAME]=sonic-linux-kernel [DIR]=src/sonic-linux-kernel [PR]=102 [URL]="$url" )
 
 CWD=`pwd`
 
