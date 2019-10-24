@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright (c) Marvell, Inc. All rights reservered. Confidential.
 # Description: Applying open PRs needed for ARM arch compilation
@@ -16,11 +16,11 @@ fi
 url="https://github.com/Azure"
 urlsai="https://patch-diff.githubusercontent.com/raw/opencomputeproject"
 
-declare -a PATCHES=(P1 P2 P3 P4 P5)
+declare -a PATCHES=(P1 P2 P5)
 declare -A P1=( [NAME]=sonic-buildimage [DIR]=. [PR]="3392 3644" [URL]="$url" )
 declare -A P2=( [NAME]=sonic-swss [DIR]=src/sonic-swss [PR]=1015 [URL]="$url" )
 #declare -A P3=( [NAME]=sonic-utilities [DIR]=src/sonic-utilities [PR]=619 [URL]="$url" )
-declare -A P4=( [NAME]=SAI [DIR]=src/sonic-sairedis/SAI [PR]="993 969" [URL]="$urlsai" )
+#declare -A P4=( [NAME]=SAI [DIR]=src/sonic-sairedis/SAI [PR]="993 969" [URL]="$urlsai" )
 declare -A P5=( [NAME]=sonic-linux-kernel [DIR]=src/sonic-linux-kernel [PR]=102 [URL]="$url" )
 
 CWD=`pwd`
@@ -48,11 +48,11 @@ do
 				echo "INFO: Applying patch"
 				patch -p1 < ${p}.diff
 				else
-				echo "ERROR: Patch has failures, try manually"
+				echo "ERROR: Patch ${!P_NAME} ${p} has failures, try manually"
 				fi
 			rm -f ${p}.diff
 		else
-			echo "ERROR: Could not download patch ${p}.diff"
+			echo "ERROR: Could not download patch ${!P_NAME} ${p}.diff"
 		fi
 			
 	done
