@@ -16,12 +16,13 @@ fi
 url="https://github.com/Azure"
 urlsai="https://patch-diff.githubusercontent.com/raw/opencomputeproject"
 
-declare -a PATCHES=(P1 P2 P3 P4 P5)
-declare -A P1=( [NAME]=sonic-buildimage [DIR]=. [PR]="3392 3644 3687 3734 3919" [URL]="$url" [PREREQ]="" )
-declare -A P2=( [NAME]=sonic-swss [DIR]=src/sonic-swss [PR]=1015 [URL]="$url" [PREREQ]="" )
+declare -a PATCHES=(P1 P2 P3 P4 P5 P6)
+declare -A P1=( [NAME]=sonic-buildimage [DIR]=. [PR]="3392 3644 3687 3734 3919 3962 3955" [URL]="$url" [PREREQ]="" )
+declare -A P2=( [NAME]=sonic-swss [DIR]=src/sonic-swss [PR]="1015 1162" [URL]="$url" [PREREQ]="" )
 declare -A P3=( [NAME]=sonic-utilities [DIR]=src/sonic-utilities [PR]=769 [URL]="$url" [PREREQ]="" )
 declare -A P4=( [NAME]=SAI [DIR]=src/sonic-sairedis/SAI [PR]="999" [URL]="$urlsai" [PREREQ]="" )
 declare -A P5=( [NAME]=sonic-linux-kernel [DIR]=src/sonic-linux-kernel [PR]=102 [URL]="$url" [PREREQ]="prereq_kernel" )
+declare -A P6=( [NAME]=sonic-platform-common [DIR]=src/sonic-platform-common [PR]=74 [URL]="$url" [PREREQ]="" )
 
 prereq_kernel()
 {
