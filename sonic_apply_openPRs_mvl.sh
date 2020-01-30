@@ -16,20 +16,27 @@ fi
 url="https://github.com/Azure"
 urlsai="https://patch-diff.githubusercontent.com/raw/opencomputeproject"
 
-declare -a PATCHES=(P1 P2 P3 P4 P5 P6)
-declare -A P1=( [NAME]=sonic-buildimage [DIR]=. [PR]="3392 3644 3687 3734 3919 3962 3955 3963 4016" [URL]="$url" [PREREQ]="" )
-declare -A P2=( [NAME]=sonic-swss [DIR]=src/sonic-swss [PR]="1015 1162 1168" [URL]="$url" [PREREQ]="" )
-declare -A P3=( [NAME]=sonic-utilities [DIR]=src/sonic-utilities [PR]=769 [URL]="$url" [PREREQ]="" )
-declare -A P4=( [NAME]=SAI [DIR]=src/sonic-sairedis/SAI [PR]="999" [URL]="$urlsai" [PREREQ]="" )
-declare -A P5=( [NAME]=sonic-linux-kernel [DIR]=src/sonic-linux-kernel [PR]=102 [URL]="$url" [PREREQ]="" )
-declare -A P6=( [NAME]=sonic-platform-common [DIR]=src/sonic-platform-common [PR]=74 [URL]="$url" [PREREQ]="" )
+declare -a PATCHES=(P1 P2 P3 P4 P5)
+declare -A P1=( [NAME]=sonic-buildimage [DIR]=. [PR]="3392 3687 3734 3919 4081 3955 3963 4016" [URL]="$url" [PREREQ]="" )
+declare -A P2=( [NAME]=sonic-swss [DIR]=src/sonic-swss [PR]="1162 1168" [URL]="$url" [PREREQ]="" )
+declare -A P3=( [NAME]=sonic-utilities [DIR]=src/sonic-utilities [PR]="" [URL]="$url" [PREREQ]="util_cfg" )
+declare -A P4=( [NAME]=sonic-linux-kernel [DIR]=src/sonic-linux-kernel [PR]="" [URL]="$url" [PREREQ]="prereq_kernel" )
+declare -A P5=( [NAME]=sonic-platform-common [DIR]=src/sonic-platform-common [PR]=74 [URL]="$url" [PREREQ]="" )
 
 prereq_kernel()
 {
     git fetch --all --tags
     git pull origin master
+    git checkout 90f7c8480c583734832feee6cc232fe5eeb71422
+    git revert 66e9dfa591369782eff63f1de09818df3a941b29
 }
+util_cfg()
+{
+    git fetch --all --tags
+    git pull origin master
+    git checkout db58367dedd88c2f7c0b8e397ecb1e08548662fa
 
+}
 CWD=`pwd`
 
 #URL_CMD="wget $url/$module/pull/$pr.diff"
