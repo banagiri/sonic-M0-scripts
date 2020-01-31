@@ -27,13 +27,15 @@ prereq_kernel()
 {
     git fetch --all --tags
     git pull origin master
+    git checkout master
     git checkout 90f7c8480c583734832feee6cc232fe5eeb71422
-    git revert 66e9dfa591369782eff63f1de09818df3a941b29
+    git revert --no-edit 66e9dfa591369782eff63f1de09818df3a941b29
 }
 util_cfg()
 {
     git fetch --all --tags
     git pull origin master
+    git checkout master
     git checkout db58367dedd88c2f7c0b8e397ecb1e08548662fa
 
 }
@@ -50,6 +52,13 @@ do
 	P_PRS=${f}[PR]
 	P_URL=${f}[URL]
 	P_PREREQ=${f}[PREREQ]
+
+        if [ -n "${!P_PREREQ}" ]
+        then
+            echo "INFO calling prereq ${!P_PREREQ}"
+            eval ${!P_PREREQ}
+        fi
+
 	for p in ${!P_PRS}
 	do
 		echo "INFO: URL ${!P_URL}/${!P_NAME}/pull/${p}.diff"
@@ -57,11 +66,6 @@ do
 		wget "${!P_URL}/${!P_NAME}/pull/${p}.diff"
 		if [ -f ${p}.diff ]
 		then
-                        if [ -n "${!P_PREREQ}" ]
-                        then
-                            echo "INFO calling prereq ${!P_PREREQ}"
-                            eval ${!P_PREREQ}
-                        fi
 			echo "INFO: patch -p1 < ${p}.diff"
 			patch -p1 -f --dry-run < ${p}.diff
 			if [ $? -eq 0 ]; then
